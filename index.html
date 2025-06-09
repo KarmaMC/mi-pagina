@@ -4,11 +4,44 @@
   <title>Escribir algo</title>
   <link rel="stylesheet" href="style.css">
 </head>
+  <!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+  // Tu configuración personalizada (Firebase te la da)
+  const firebaseConfig = {
+  apiKey: "AIzaSyCA49k7Ixs0tZ0NuObYHU5zVipzIfnvOPM",
+  authDomain: "mi-pagina-40283.firebaseapp.com",
+  databaseURL: "https://mi-pagina-40283-default-rtdb.firebaseio.com",
+  projectId: "mi-pagina-40283",
+  storageBucket: "mi-pagina-40283.firebasestorage.app",
+  messagingSenderId: "137375923688",
+  appId: "1:137375923688:web:116ca462745d43f0f6385d",
+  };
+
+  // Inicializar Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  function guardar() {
+    const texto = document.getElementById("input-dato").value.trim();
+    if (texto !== "") {
+      db.ref("datos").push({
+        mensaje: texto,
+        fecha: new Date().toISOString()
+      }).then(() => {
+        alert("¡Dato guardado!");
+        window.location.href = "mostrar.html";
+      });
+    }
+  }
+</script>
 <body>
   <h2>Escribe algo y haz clic:</h2>
 
-  <input type="text" id="input-dato" placeholder="Escribe aquí...">
-  <button onclick="enviar()">Enviar</button>
+<input type="text" id="input-dato" placeholder="Escribe algo">
+<button onclick="guardar()">Enviar</button>
 
   <script>
     function enviar() {
