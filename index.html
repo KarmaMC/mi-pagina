@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Escribir algo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Escribe algo y haz clic:</h2>
+
+  <input type="text" id="input-dato" placeholder="Escribe aquí...">
+  <button onclick="enviar()">Enviar</button>
+
+  <script>
+    function enviar() {
+      const texto = document.getElementById("input-dato").value.trim();
+      if (texto !== "") {
+        localStorage.setItem("datoGuardado", texto);  // Guardamos el dato
+        window.location.href = "mostrar.html";        // Vamos a la otra página
+      } else {
+        alert("Escribe algo primero.");
+      }
+    }
+  </script>
+</body>
+</html>
