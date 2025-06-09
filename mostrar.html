@@ -13,3 +13,23 @@
   <script src="mostrar.js"></script>
 </body>
 </html>
+<!-- Firebase scripts igual que antes -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+  const firebaseConfig = { /* tu config otra vez */ };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  db.ref("datos").limitToLast(1).on("value", (snapshot) => {
+    const contenedor = document.getElementById("resultado");
+    contenedor.innerHTML = "";
+    snapshot.forEach((dato) => {
+      contenedor.innerHTML = `<p>${dato.val().mensaje}</p>`;
+    });
+  });
+</script>
+
+<h2>Último mensaje guardado:</h2>
+<div id="resultado">Cargando...</div>
